@@ -53,6 +53,7 @@
     <Compile Include="StoreModels\Check.cs" />
     <Compile Include="StoreModels\Contact.cs" />
     <Compile Include="StoreModels\Data.cs" />
+    <Compile Include="StoreModels\MoneyTransaction.cs" />
     <Compile Include="StoreModels\Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
