@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StoreManager.StoreModels;
 
 namespace StoreManager
 {
@@ -11,7 +12,7 @@ namespace StoreManager
         private int availability;
         private string barCode;
         private long buyPrice;
-        private Category category;
+        private  Category category;
         private int code;
         private string name;
         private long sellPrice;
