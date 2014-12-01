@@ -49,5 +49,19 @@ namespace StoreManager
             DBContext myDb = new DBContext();
             myDb.save(sc);
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            StoreModels.Category c = new StoreModels.Category()
+            {
+                Name = "دسته1",
+                SuperCategory = new StoreModels.SuperCategory()
+                {
+                    Name = "سوپر دسته جدید"
+                }
+            };
+            DBContext myDb = new DBContext();
+            myDb.save(c);
+        }
     }
 }

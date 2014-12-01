@@ -32,9 +32,15 @@ namespace StoreManager
             SaveChanges();
         }
 
-        public System.Data.Entity.DbSet<Check> checks { get; set; }
-        public System.Data.Entity.DbSet<SuperCategory> superCategories { get; set; } 
+        public void save(Category c)
+        {
+            categories.Add(c);
+            SaveChanges();
+        }
 
+        public System.Data.Entity.DbSet<Check> checks { get; set; }
+        public System.Data.Entity.DbSet<SuperCategory> superCategories { get; set; }
+        public System.Data.Entity.DbSet<Category> categories { get; set; } 
 
     }
 }

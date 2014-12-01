@@ -12,12 +12,15 @@ namespace StoreManager.StoreModels
         private string name;
         private SuperCategory superCategory;
 
+
+        [System.ComponentModel.DataAnnotations.Required]
         public string Name
         {
             get { return name; }
             set { name = value; }
         }
 
+        [System.ComponentModel.DataAnnotations.Key]
         public int Code
         {
             get { return code; }
@@ -25,6 +28,7 @@ namespace StoreManager.StoreModels
         }
 
 
+        [System.ComponentModel.DataAnnotations.Required]
         public SuperCategory SuperCategory
         {
             get { return superCategory; }
