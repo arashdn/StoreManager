@@ -24,25 +24,37 @@ namespace StoreManager.StoreModels
         private DateTime date;
 
 
+        [System.ComponentModel.DataAnnotations.Required]
         public DateTime Date
         {
             get { return date; }
             set { date = value; }
         }
-        
 
+
+
+
+        public PersianDateTime PersianDate
+        {
+            get { return new PersianDateTime(Date); }
+        }
+
+        [System.ComponentModel.DataAnnotations.Required]
         public VosoolStatuses VosoolStatus
         {
             get { return vosoolStatus; }
             set { vosoolStatus = value; }
         }
-        
+
+
+        [System.ComponentModel.DataAnnotations.Required]
         public long Price
         {
             get { return price; }
             set { price = value; }
         }
         
+        [System.ComponentModel.DataAnnotations.Key]
         public int Code
         {
             get { return code; }

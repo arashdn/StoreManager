@@ -17,7 +17,7 @@ namespace StoreManager
         private string name;
         private long sellPrice;
 
-        public long SellPrice//esm ha be in soorate
+        public long SellPrice
         {
             get { return sellPrice; }
             set { sellPrice = value; }
