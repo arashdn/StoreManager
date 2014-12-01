@@ -30,15 +30,24 @@ namespace StoreManager
             StoreModels.Check ch = new StoreModels.Check()
             {
                 Date = DateTime.Now,
-                Price = 1000,
+                Price = 2000,
                 VosoolStatus = StoreModels.Check.VosoolStatuses.pishAzMoed,
-                BankBranch = "123"
+                BankBranch = "1234"
                 
             };
 
             DBContext myDb = new DBContext();
-            myDb.checks.Add(ch);
-            myDb.SaveChanges();
+            myDb.save(ch);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            StoreModels.SuperCategory sc = new StoreModels.SuperCategory()
+            {
+                Name="سوپر دسته1"
+            };
+            DBContext myDb = new DBContext();
+            myDb.save(sc);
         }
     }
 }

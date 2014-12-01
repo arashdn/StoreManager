@@ -9,12 +9,31 @@ namespace StoreManager
 {
     class DBContext : System.Data.Entity.DbContext
     {
+        static DBContext()
+        {
+            System.Data.Entity.Database.SetInitializer(new System.Data.Entity.DropCreateDatabaseIfModelChanges<DBContext>());
+        }
         public DBContext() : base("StoreManager")
         {
 
         }
 
-        public System.Data.Entity.DbSet<Check> checks { get; set; }  
+
+        public void save(Check ck)
+        {
+            checks.Add(ck);
+            SaveChanges();
+        }
+
+
+        public void save(SuperCategory sc)
+        {
+            superCategories.Add(sc);
+            SaveChanges();
+        }
+
+        public System.Data.Entity.DbSet<Check> checks { get; set; }
+        public System.Data.Entity.DbSet<SuperCategory> superCategories { get; set; } 
 
 
     }
