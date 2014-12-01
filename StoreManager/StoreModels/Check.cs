@@ -8,13 +8,30 @@ namespace StoreManager.StoreModels
 {
     class Check
     {
+
+        public enum VosoolStatuses
+        {
+            vosoolShode = 1,
+            pishAzMoed,
+            bargashti
+        }
+
         private string bankBranch;
         private string checkNumber;
         private int code;
         private long price;
-        private int vosoolStatus;
+        private VosoolStatuses vosoolStatus;
+        private DateTime date;
 
-        public int VosoolStatus
+
+        public DateTime Date
+        {
+            get { return date; }
+            set { date = value; }
+        }
+        
+
+        public VosoolStatuses VosoolStatus
         {
             get { return vosoolStatus; }
             set { vosoolStatus = value; }
