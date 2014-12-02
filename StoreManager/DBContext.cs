@@ -38,9 +38,16 @@ namespace StoreManager
             SaveChanges();
         }
 
+        public void save(Product p)
+        {
+            products.Add(p);
+            SaveChanges();
+        }
+
         public System.Data.Entity.DbSet<Check> checks { get; set; }
         public System.Data.Entity.DbSet<SuperCategory> superCategories { get; set; }
-        public System.Data.Entity.DbSet<Category> categories { get; set; } 
+        public System.Data.Entity.DbSet<Category> categories { get; set; }
+        public System.Data.Entity.DbSet<Product> products { get; set; }
 
     }
 }

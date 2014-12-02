@@ -65,9 +65,9 @@
     <Compile Include="StoreModels\Check.cs" />
     <Compile Include="StoreModels\Contact.cs" />
     <Compile Include="StoreModels\MoneyTransaction.cs" />
-    <Compile Include="StoreModels\Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StoreModels\Product.cs" />
     <Compile Include="StoreModels\ProductTransaction.cs" />
     <Compile Include="StoreModels\ProductTransactionItem.cs" />
     <Compile Include="StoreModels\SuperCategory.cs" />

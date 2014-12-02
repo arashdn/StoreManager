@@ -33,7 +33,7 @@ namespace StoreManager
                 Price = 2000,
                 VosoolStatus = StoreModels.Check.VosoolStatuses.pishAzMoed,
                 BankBranch = "1234"
-                
+
             };
 
             DBContext myDb = new DBContext();
@@ -42,9 +42,10 @@ namespace StoreManager
 
         private void button2_Click(object sender, EventArgs e)
         {
+
             StoreModels.SuperCategory sc = new StoreModels.SuperCategory()
             {
-                Name="سوپر دسته1"
+                Name = "سوپر دسته1"
             };
             DBContext myDb = new DBContext();
             myDb.save(sc);
@@ -52,16 +53,53 @@ namespace StoreManager
 
         private void button3_Click(object sender, EventArgs e)
         {
+            DBContext myDb = new DBContext();
+            myDb.superCategories.Where(o => o.Name == "سوپر دسته1").Load();
+            var scats = myDb.superCategories.ToList();
+
+            StoreModels.SuperCategory sc;
+            if (scats.Count == 0)
+                sc = new StoreModels.SuperCategory()
+                {
+                    Name = "سوپر دسته جدید"
+                };
+            else
+                sc = scats[0];
+
             StoreModels.Category c = new StoreModels.Category()
             {
                 Name = "دسته1",
-                SuperCategory = new StoreModels.SuperCategory()
-                {
-                    Name = "سوپر دسته جدید"
-                }
+                SuperCategory = sc
             };
-            DBContext myDb = new DBContext();
+
             myDb.save(c);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            DBContext myDb = new DBContext();
+            myDb.categories.Where(o => o.Name == "دسته1").Load();
+            var cats = myDb.categories.ToList();
+
+            StoreModels.Category c;
+            if (cats.Count == 0)
+                c = new StoreModels.Category()
+                {
+                    Name = "دسته جدید"
+                };
+            else
+                c = cats[0];
+            StoreModels.Product p = new StoreModels.Product()
+            {
+                Availability = 10,
+                BuyPrice = 1000,
+                SellPrice = 1500,
+                Category = c,
+                Name = "محصول1",
+            };
+
+          
+            myDb.save(p);
         }
     }
 }
