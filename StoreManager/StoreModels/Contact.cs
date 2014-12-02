@@ -12,14 +12,25 @@ namespace StoreManager.StoreModels
         private string name;
         private string note;
         private string phone;
-        private int type;
+        private Types type;
 
-        public int Type
+        public enum Types
+        {
+            Person,
+            Company
+        }
+
+
+
+
+        [System.ComponentModel.DataAnnotations.Required]
+        public Types Type
         {
             get { return type; }
             set { type = value; }
         }
         
+
         public string Phone
         {
             get { return phone; }
@@ -31,13 +42,16 @@ namespace StoreManager.StoreModels
             get { return note; }
             set { note = value; }
         }
-        
+
+        [System.ComponentModel.DataAnnotations.Required]
         public string Name
         {
             get { return name; }
             set { name = value; }
         }
 
+
+        [System.ComponentModel.DataAnnotations.Key]
         public int Code
         {
             get { return code; }

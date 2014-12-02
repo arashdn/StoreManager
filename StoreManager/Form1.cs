@@ -101,5 +101,17 @@ namespace StoreManager
           
             myDb.save(p);
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            StoreModels.Contact con = new StoreModels.Contact()
+            {
+                Name="Arash",
+                Type=StoreModels.Contact.Types.Person,
+                Phone="09355000000"
+            };
+            DBContext myDB = new DBContext();
+            myDB.save(con);
+        }
     }
 }
