@@ -83,10 +83,13 @@ namespace StoreManager
 
             StoreModels.Category c;
             if (cats.Count == 0)
+            {
                 c = new StoreModels.Category()
                 {
                     Name = "دسته جدید"
                 };
+            }
+                
             else
                 c = cats[0];
             StoreModels.Product p = new StoreModels.Product()

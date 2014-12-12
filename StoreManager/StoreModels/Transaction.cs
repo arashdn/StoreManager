@@ -11,8 +11,8 @@ namespace StoreManager.StoreModels
         private int paymentType;
         private int code;
         private Contact contact;
-        private DateTime creationData;
-        private int paymentData;
+        private DateTime creationDate;
+        private int paymentDate;
         private long totalPrice;
         private int type;
 
@@ -28,16 +28,16 @@ namespace StoreManager.StoreModels
             set { totalPrice = value; }
         }
         
-        public int PaymentData
+        public int PaymentDate
         {
-            get { return paymentData; }
-            set { paymentData = value; }
+            get { return paymentDate; }
+            set { paymentDate = value; }
         }
         
-        public DateTime CreationData
+        public DateTime CreationDate
         {
-            get { return creationData; }
-            set { creationData = value; }
+            get { return creationDate; }
+            set { creationDate = value; }
         }
         
         public Contact Contact
