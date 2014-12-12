@@ -17,11 +17,9 @@ namespace StoreManager.StoreModels
 
 
         private bool isPersonal;
-        private PaymentTypes payType;
 
         private MTTypes type;
 
-        [System.ComponentModel.DataAnnotations.Schema.Column("MTType")]
         [System.ComponentModel.DataAnnotations.Required]
         public MTTypes Type
         {
@@ -29,12 +27,6 @@ namespace StoreManager.StoreModels
             set { type = value; }
         }
 
-        [System.ComponentModel.DataAnnotations.Required]
-        public PaymentTypes PayType
-        {
-            get { return payType; }
-            set { payType = value; }
-        }
 
 
         [System.ComponentModel.DataAnnotations.Required]

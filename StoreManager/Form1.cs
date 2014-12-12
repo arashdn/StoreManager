@@ -125,7 +125,6 @@ namespace StoreManager
                 {
                     CreationDate = DateTime.Now,
                     IsPersonal = true,
-                    PayType = StoreModels.Transaction.PaymentTypes.Other,
                     TotalPrice = 10000,
                     Type = StoreModels.MoneyTransaction.MTTypes.Hazine
                     
@@ -137,6 +136,30 @@ namespace StoreManager
             {
 
                 throw ex;
+            }
+            
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                StoreModels.FinancialTransaction ft = new StoreModels.FinancialTransaction()
+                {
+                    CreationDate = DateTime.Now,
+                    IsPersonal = true,
+                    TotalPrice = 10000,
+                    Type = StoreModels.FinancialTransaction.FTTypes.Talab,
+                    PayType = StoreModels.Transaction.PaymentTypes.Naghd
+
+                };
+                DBContext myDB = new DBContext();
+                myDB.save(ft);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                //throw;
             }
             
         }
