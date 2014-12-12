@@ -50,11 +50,18 @@ namespace StoreManager
             SaveChanges();
         }
 
+        public void save(MoneyTransaction mt)
+        {
+            moneyTransactions.Add(mt);
+            SaveChanges();
+        }
+
         public System.Data.Entity.DbSet<Check> checks { get; set; }
         public System.Data.Entity.DbSet<SuperCategory> superCategories { get; set; }
         public System.Data.Entity.DbSet<Category> categories { get; set; }
         public System.Data.Entity.DbSet<Product> products { get; set; }
         public System.Data.Entity.DbSet<Contact> contacts { get; set; }
+        public System.Data.Entity.DbSet<MoneyTransaction> moneyTransactions { get; set; }
 
     }
 }

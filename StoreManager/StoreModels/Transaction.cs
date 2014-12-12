@@ -8,32 +8,41 @@ namespace StoreManager.StoreModels
 {
     class Transaction
     {
-        private int paymentType;
-        private int code;
-        private Contact contact;
-        private DateTime creationDate;
-        private int paymentDate;
-        private long totalPrice;
-        private int type;
 
-        public int Type
+        private int code;
+        private Contact contact;//aggregation
+        private Check check;//aggregation
+        private DateTime creationDate;
+        private DateTime paymentDate;
+        private long totalPrice;
+        private string note;
+
+
+        public Check Check
         {
-            get { return type; }
-            set { type = value; }
+            get { return check; }
+            set { check = value; }
         }
-        
+        public string Note
+        {
+            get { return note; }
+            set { note = value; }
+        }
+
+        [System.ComponentModel.DataAnnotations.Required]
         public long TotalPrice
         {
             get { return totalPrice; }
             set { totalPrice = value; }
         }
-        
-        public int PaymentDate
+
+        public DateTime PaymentDate
         {
             get { return paymentDate; }
             set { paymentDate = value; }
         }
-        
+
+        [System.ComponentModel.DataAnnotations.Required]
         public DateTime CreationDate
         {
             get { return creationDate; }
@@ -45,7 +54,9 @@ namespace StoreManager.StoreModels
             get { return contact; }
             set { contact = value; }
         }
-        
+
+
+        [System.ComponentModel.DataAnnotations.Key]
         public int Code
         {
             get { return code; }

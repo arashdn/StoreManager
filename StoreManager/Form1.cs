@@ -116,5 +116,10 @@ namespace StoreManager
             DBContext myDB = new DBContext();
             myDB.save(con);
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            StoreModels.MoneyTransaction mt = new StoreModels.MoneyTransaction();
+        }
     }
 }

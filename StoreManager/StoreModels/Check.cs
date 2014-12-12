@@ -12,8 +12,10 @@ namespace StoreManager.StoreModels
         public enum VosoolStatuses
         {
             vosoolShode = 1,
+            vosoolNashode,
             pishAzMoed,
-            bargashti
+            bargashti,
+            other
         }
 
         private string bankBranch;
