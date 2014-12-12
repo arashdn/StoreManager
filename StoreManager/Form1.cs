@@ -119,7 +119,26 @@ namespace StoreManager
 
         private void button6_Click(object sender, EventArgs e)
         {
-            StoreModels.MoneyTransaction mt = new StoreModels.MoneyTransaction();
+            try
+            {
+                StoreModels.MoneyTransaction mt = new StoreModels.MoneyTransaction()
+                {
+                    CreationDate = DateTime.Now,
+                    IsPersonal = true,
+                    PayType = StoreModels.Transaction.PaymentTypes.Other,
+                    TotalPrice = 10000,
+                    Type = StoreModels.MoneyTransaction.MTTypes.Hazine
+                    
+                };
+                DBContext myDB = new DBContext();
+                myDB.save(mt);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
         }
     }
 }

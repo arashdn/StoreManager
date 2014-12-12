@@ -9,21 +9,21 @@ namespace StoreManager.StoreModels
     class MoneyTransaction:Transaction
     {
 
-        public enum Types
+        public enum MTTypes
         {
             Hazine = 1,
             DarAmad
         }
 
 
-        private int isPersonal;
+        private bool isPersonal;
         private PaymentTypes payType;
 
-        private Types type;
+        private MTTypes type;
 
-
+        [System.ComponentModel.DataAnnotations.Schema.Column("MTType")]
         [System.ComponentModel.DataAnnotations.Required]
-        public Types Type
+        public MTTypes Type
         {
             get { return type; }
             set { type = value; }
@@ -38,7 +38,7 @@ namespace StoreManager.StoreModels
 
 
         [System.ComponentModel.DataAnnotations.Required]
-        public int IsPersonal
+        public bool IsPersonal
         {
             get { return isPersonal; }
             set { isPersonal = value; }

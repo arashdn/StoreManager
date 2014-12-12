@@ -23,7 +23,7 @@ namespace StoreManager.StoreModels
         private Contact contact;//aggregation
         private Check check;//aggregation
         private DateTime creationDate;
-        private DateTime paymentDate;
+        private DateTime? paymentDate;
         private long totalPrice;
         private string note;
 
@@ -46,7 +46,7 @@ namespace StoreManager.StoreModels
             set { totalPrice = value; }
         }
 
-        public DateTime PaymentDate
+        public DateTime? PaymentDate
         {
             get { return paymentDate; }
             set { paymentDate = value; }
@@ -71,6 +71,16 @@ namespace StoreManager.StoreModels
         {
             get { return code; }
             set { code = value; }
+        }
+
+        public PersianDateTime PersianCreationDateDate
+        {
+            get { return new PersianDateTime(creationDate); }
+        }
+
+        public PersianDateTime PersianPaymentDate
+        {
+            get { return new PersianDateTime((DateTime)paymentDate); }
         }
         
     }
