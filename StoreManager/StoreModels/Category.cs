@@ -10,7 +10,7 @@ namespace StoreManager.StoreModels
     {
         private int code;
         private string name;
-        private SuperCategory superCategory;
+        private SuperCategory superCategory;//aggregation
 
 
         [System.ComponentModel.DataAnnotations.Required]

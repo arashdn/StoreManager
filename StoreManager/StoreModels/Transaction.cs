@@ -9,6 +9,16 @@ namespace StoreManager.StoreModels
     class Transaction
     {
 
+
+        public enum PaymentTypes //estefade shode dar class haye inherit shode
+        {
+            Naghd = 1,
+            Check,
+            Variz,
+            Other
+        }
+
+
         private int code;
         private Contact contact;//aggregation
         private Check check;//aggregation

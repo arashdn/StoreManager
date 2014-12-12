@@ -8,8 +8,36 @@ namespace StoreManager.StoreModels
 {
     class MoneyTransaction:Transaction
     {
-        private int isPersonal;
 
+        public enum Types
+        {
+            Hazine = 1,
+            DarAmad
+        }
+
+
+        private int isPersonal;
+        private PaymentTypes payType;
+
+        private Types type;
+
+
+        [System.ComponentModel.DataAnnotations.Required]
+        public Types Type
+        {
+            get { return type; }
+            set { type = value; }
+        }
+
+        [System.ComponentModel.DataAnnotations.Required]
+        public PaymentTypes PayType
+        {
+            get { return payType; }
+            set { payType = value; }
+        }
+
+
+        [System.ComponentModel.DataAnnotations.Required]
         public int IsPersonal
         {
             get { return isPersonal; }
