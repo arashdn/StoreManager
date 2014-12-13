@@ -63,10 +63,103 @@ namespace StoreManager
             SaveChanges();
         }
 
+        public void save(ProductTransaction pt)
+        {
+            ProductTransactions.Add(pt);
+            SaveChanges();
+        }
 
         #endregion
 
+        #region Update Methods
 
+        public void update(Check ck)
+        {
+
+        }
+
+
+        public void update(SuperCategory sc)
+        {
+
+        }
+
+        public void update(Category c)
+        {
+
+        }
+
+        public void update(Product p)
+        {
+
+        }
+
+        public void update(Contact c)
+        {
+
+        }
+
+        public void update(MoneyTransaction mt)
+        {
+
+        }
+
+        public void update(FinancialTransaction ft)
+        {
+
+        }
+
+        public void update(ProductTransaction pt)
+        {
+
+        }
+
+        #endregion
+
+        #region Delete Methods
+
+        public void delete(Check ck)
+        {
+
+        }
+
+
+        public void delete(SuperCategory sc)
+        {
+
+        }
+
+        public void delete(Category c)
+        {
+
+        }
+
+        public void delete(Product p)
+        {
+
+        }
+
+        public void delete(Contact c)
+        {
+
+        }
+
+        public void delete(MoneyTransaction mt)
+        {
+
+        }
+
+        public void delete(FinancialTransaction ft)
+        {
+
+        }
+
+        public void delete(ProductTransaction pt)
+        {
+
+        }
+
+        #endregion
 
 
         public System.Data.Entity.DbSet<Check> checks { get; set; }

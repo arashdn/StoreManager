@@ -163,5 +163,52 @@ namespace StoreManager
             }
             
         }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            DBContext myDB = new DBContext();
+            myDB.products.Load();
+            var lst = myDB.products.ToList();
+            if (lst.Count == 0)
+            {
+                MessageBox.Show("محصولی ثبت نشده");
+                return;
+            }
+            StoreModels.Product p = lst[0];
+            StoreModels.ProductTransactionItem pti = new StoreModels.ProductTransactionItem()
+            {
+                Product = p,
+                Count = 3,
+                ItemPrice = lst[0].SellPrice,
+                ItemDiscount = 0,
+            };
+
+            //myDB.ProductTransactionItemes.Add(pti);
+            //myDB.SaveChanges();
+
+
+            //try
+            //{
+            //    myDB.save(pt);
+            //}
+            //catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            //{
+            //    String s="";
+            //    foreach (var validationErrors in dbEx.EntityValidationErrors)
+            //    {
+            //        foreach (var validationError in validationErrors.ValidationErrors)
+            //        {
+            //            System.Diagnostics.Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+            //            s = s + "\nProperty: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage;
+            //        }
+            //    }
+            //    MessageBox.Show(s);
+            //}
+
+
+            Store myStore = new Store();
+            myStore.sell(pti);
+                
+        }
     }
 }

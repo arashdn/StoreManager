@@ -61,6 +61,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Store.cs" />
     <Compile Include="StoreModels\Category.cs" />
     <Compile Include="StoreModels\Check.cs" />
     <Compile Include="StoreModels\Contact.cs" />

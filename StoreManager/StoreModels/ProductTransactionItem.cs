@@ -19,7 +19,7 @@ namespace StoreManager.StoreModels
         {
             public Configuration()
             {
-                
+
                 HasRequired(current => current.ParentTransaction)
                     .WithMany(ProductTransaction => ProductTransaction.items)
                     .WillCascadeOnDelete(true);
@@ -35,11 +35,11 @@ namespace StoreManager.StoreModels
         #region R/W Properties
 
         //for one to many relation
-        public ProductTransaction ParentTransaction { get; set; }
+        public virtual ProductTransaction ParentTransaction { get; set; }
 
 
         [System.ComponentModel.DataAnnotations.Required]
-        public Product Product
+        public virtual Product Product
         {
             get { return product; }
             set { product = value; }

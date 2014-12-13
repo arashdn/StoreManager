@@ -12,8 +12,24 @@ namespace StoreManager.StoreModels
         //Also creates one to many releation in EF
         //virtual is for lazy loading
         [System.ComponentModel.DataAnnotations.Required]
-        public virtual List<ProductTransactionItem> items { get; set; }
+        //public virtual List<ProductTransactionItem> items { get; set; }
+        public List<ProductTransactionItem> items 
+        {
+            get
+            {
+                if (itms == null)
+                    itms = new List<ProductTransactionItem>();
+                return itms;
+            }
 
+            set
+            {
+
+            }
+        }
+
+
+        private List<ProductTransactionItem> itms;
 
         #region ReadOnly Properties
         public long TotalDiscount
