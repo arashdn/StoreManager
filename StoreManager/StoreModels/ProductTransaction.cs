@@ -6,26 +6,43 @@ using System.Threading.Tasks;
 
 namespace StoreManager.StoreModels
 {
-    class ProductTransaction:ProductTransactionItem
+    class ProductTransaction:Transaction
     {
-        //private ProductTransactionItem items;
 
-        //public ProductTransactionItem Items
-        //{
-        //    get { return items; }
-        //    set { items = value; }
-        //}
-        //public long TotalDiscount
-        //{
-        //    get { return items; }
-        //}
-        //public long TotalPrice
-        //{
-        //    get { return items; }
-        //}
-        //public long PriceAfterDiscount
-        //{
-        //    get { return TotalPrice-TotalDiscount; }
-        //}
+        //Also creates one to many releation in EF
+        //virtual is for lazy loading
+        [System.ComponentModel.DataAnnotations.Required]
+        public virtual List<ProductTransactionItem> items { get; set; }
+
+
+        #region ReadOnly Properties
+        public long TotalDiscount
+        {
+            get 
+            {
+                long sum = 0;
+                foreach (ProductTransactionItem item in items)
+                    sum += item.TotalDiscount;
+                return sum;
+            }
+        }
+        public long TotalPrice
+        {
+            get 
+            {
+                long sum = 0;
+                foreach (ProductTransactionItem item in items)
+                    sum += item.TotalPrice;
+                return sum;
+            }
+        }
+        public long PriceAfterDiscount
+        {
+            get 
+            { 
+                return TotalPrice - TotalDiscount; 
+            }
+        }
+        #endregion
     }
 }

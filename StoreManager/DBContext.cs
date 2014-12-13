@@ -19,6 +19,7 @@ namespace StoreManager
         }
 
 
+        #region Save Methods
         public void save(Check ck)
         {
             checks.Add(ck);
@@ -62,6 +63,12 @@ namespace StoreManager
             SaveChanges();
         }
 
+
+        #endregion
+
+
+
+
         public System.Data.Entity.DbSet<Check> checks { get; set; }
         public System.Data.Entity.DbSet<SuperCategory> superCategories { get; set; }
         public System.Data.Entity.DbSet<Category> categories { get; set; }
@@ -69,5 +76,17 @@ namespace StoreManager
         public System.Data.Entity.DbSet<Contact> contacts { get; set; }
         public System.Data.Entity.DbSet<MoneyTransaction> moneyTransactions { get; set; }
         public System.Data.Entity.DbSet<FinancialTransaction> FinancialTransactions { get; set; }
+        public System.Data.Entity.DbSet<ProductTransaction> ProductTransactions { get; set; }
+        public System.Data.Entity.DbSet<ProductTransactionItem> ProductTransactionItemes { get; set; }
+
+
+        protected override void OnModelCreating (System.Data.Entity.DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Configurations.Add(new ProductTransactionItem.Configuration());
+        }
+
+
     }
 }
