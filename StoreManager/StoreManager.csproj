@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounting.cs" />
     <Compile Include="DBContext.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -61,6 +62,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report.cs" />
     <Compile Include="Store.cs" />
     <Compile Include="StoreModels\Category.cs" />
     <Compile Include="StoreModels\Check.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="StoreModels\ProductTransactionItem.cs" />
     <Compile Include="StoreModels\SuperCategory.cs" />
     <Compile Include="StoreModels\Transaction.cs" />
+    <Compile Include="Timing.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
