@@ -30,5 +30,9 @@ namespace StoreManager
         {
             DBContext myDB = new DBContext();////We need this to use function - association
         }
+        public void pardakhteNesie(ProductTransaction pt)
+        {
+            DBContext myDB = new DBContext();////We need this to use function - association
+        }
     }
 }
