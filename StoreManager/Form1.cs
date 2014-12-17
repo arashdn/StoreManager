@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
+
 using System.Data.Entity;
 
 namespace StoreManager
@@ -168,47 +169,219 @@ namespace StoreManager
         {
             DBContext myDB = new DBContext();
             myDB.products.Load();
+            StoreModels.Contact c = new StoreModels.Contact(); c = null;
+            bool isPaid=true;
+            StoreModels.Check ch = new StoreModels.Check(); ch = null;
             var lst = myDB.products.ToList();
             if (lst.Count == 0)
             {
                 MessageBox.Show("محصولی ثبت نشده");
                 return;
             }
-            StoreModels.Product p = lst[0];
-            StoreModels.ProductTransactionItem pti = new StoreModels.ProductTransactionItem()
+
+            List<StoreModels.ProductTransactionItem> listpti = new List<StoreModels.ProductTransactionItem>();
+            for (int i = 0; i < lst.Count; i++)
             {
-                Product = p,
-                Count = 3,
-                ItemPrice = lst[0].SellPrice,
-                ItemDiscount = 0,
-            };
-
-            //myDB.ProductTransactionItemes.Add(pti);
-            //myDB.SaveChanges();
-
-
-            //try
-            //{
-            //    myDB.save(pt);
-            //}
-            //catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
-            //{
-            //    String s="";
-            //    foreach (var validationErrors in dbEx.EntityValidationErrors)
-            //    {
-            //        foreach (var validationError in validationErrors.ValidationErrors)
-            //        {
-            //            System.Diagnostics.Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
-            //            s = s + "\nProperty: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage;
-            //        }
-            //    }
-            //    MessageBox.Show(s);
-            //}
-
+                StoreModels.ProductTransactionItem temp = new StoreModels.ProductTransactionItem()
+                {
+                    Product = lst[i],
+                    Count = 3,
+                    ItemPrice = lst[0].SellPrice,
+                    ItemDiscount = 0,
+                };
+                listpti.Add(temp);
+            }
 
             Store myStore = new Store();
-            myStore.sell(pti);
-                
+            myStore.sell(listpti, DateTime.Now,null,isPaid,c,ch);                
         }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            DBContext myDb = null;
+            try
+            {
+                myDb = new DBContext();
+                var temp = myDb.checks.Where(i => i.Code == 3).First();
+                temp.Price = 1000;
+                myDb.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            DBContext myDb = null;
+            try
+            {
+                myDb = new DBContext();
+                StoreModels.Check ck = myDb.checks.Where(i => i.Code == 4).First();
+                myDb.checks.Attach(ck);
+                myDb.delete(ck);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            DBContext myDb = null;
+            try
+            {
+                myDb = new DBContext();
+                StoreModels.SuperCategory sc = myDb.superCategories.Where(i => i.Code == 1).FirstOrDefault();
+                myDb.superCategories.Attach(sc);
+                myDb.delete(sc);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            DBContext myDb = null;
+            try
+            {
+                myDb = new DBContext();
+                StoreModels.Category c = myDb.categories.Where(i => i.Code == 2).FirstOrDefault();
+                myDb.categories.Attach(c);
+                myDb.delete(c);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            DBContext myDb = null;
+            try
+            {
+                myDb = new DBContext();
+                StoreModels.Product p = myDb.products.Where(i => i.Code == 5).FirstOrDefault();
+                myDb.products.Attach(p);
+                myDb.delete(p);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void button20_Click(object sender, EventArgs e)
+        {
+            DBContext myDb = null;
+            try
+            {
+                myDb = new DBContext();
+                StoreModels.Contact c = myDb.contacts.Where(i => i.Code==1).FirstOrDefault();
+                myDb.contacts.Attach(c);
+                myDb.delete(c);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void button21_Click(object sender, EventArgs e)
+        {
+            DBContext myDb = null;
+            try
+            {
+                myDb = new DBContext();
+                StoreModels.MoneyTransaction mt = myDb.moneyTransactions.Where(i => i.Code == 1).FirstOrDefault();
+                myDb.moneyTransactions.Attach(mt);
+                myDb.delete(mt);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            DBContext myDb = null;
+            try
+            {
+                myDb = new DBContext();
+                StoreModels.FinancialTransaction ft = myDb.FinancialTransactions.Where(i => i.Code == 2).FirstOrDefault();
+                myDb.FinancialTransactions.Attach(ft);
+                myDb.delete(ft);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            DBContext myDb = null;
+            try
+            {
+                myDb = new DBContext();
+                myDb.products.Load();
+                var lst = myDb.products.ToList();
+                if (lst.Count == 0)
+                {
+                    //لیست خالی
+                }
+                else
+                {
+                    bool flag = false;
+                    myDb.superCategories.Load();
+                    var lst1 = myDb.superCategories.ToList();
+                    for (int i = 0; i < lst1.Count; i++)
+                    {
+                        if (lst1[i].Name =="")
+                        {
+                            flag = true;
+                        }
+                        if (!flag)
+                        {
+                            StoreModels.SuperCategory sc = new StoreModels.SuperCategory()
+                            {
+                                Name = "سوپر دسته"
+                            };
+                            myDb.save(sc);
+                        }
+                    }
+                    myDb.categories.Load();
+                    var lst2 = myDb.categories.ToList();
+                    for (int i = 0; i < lst1.Count; i++)
+                    {
+                        if (lst2[i].Name == "دسته1")
+                        {
+                            flag = true;
+                        }
+                        if (!flag)
+                        {
+                            StoreModels.Category c = new StoreModels.Category()
+                            {
+                                Name = "کالا"
+                            };
+                            myDb.save(c);
+                        }
+                    }
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
     }
 }

@@ -20,16 +20,12 @@ namespace StoreManager.StoreModels
             Company
         }
 
-
-
-
         [System.ComponentModel.DataAnnotations.Required]
         public Types Type
         {
             get { return type; }
             set { type = value; }
         }
-        
 
         public string Phone
         {

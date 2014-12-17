@@ -19,16 +19,15 @@ namespace StoreManager
         public void sell(List<ProductTransactionItem> pti , DateTime date,  string not = null , bool isPaid = true ,Contact con = null , Check chk = null)
         {
             DateTime? paydate = null;
-            if(isPaid)
-                paydate=DateTime.Now;
+            if (isPaid)
+                paydate = DateTime.Now;
             ProductTransaction pt = new ProductTransaction()
             {
                 CreationDate = date,
                 PaymentDate = paydate,
                 Check = chk,
                 Contact = con,
-                Note=not, 
-                
+                Note = not,
             };
             DBContext myDBContext = new DBContext();
             foreach (ProductTransactionItem item in pti)
@@ -36,7 +35,7 @@ namespace StoreManager
                 pt.items.Add(item);
                 myDBContext.products.Attach(item.Product); //association with product and dbcontext
             }
-            
+
             myDBContext.save(pt);
             
         }
@@ -51,7 +50,12 @@ namespace StoreManager
         {
 
         }
-    
-    
+
+
+
+        internal void sell()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

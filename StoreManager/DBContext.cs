@@ -120,43 +120,50 @@ namespace StoreManager
 
         public void delete(Check ck)
         {
-
+            checks.Remove(ck);
+            SaveChanges();
         }
 
 
         public void delete(SuperCategory sc)
         {
-
+            superCategories.Remove(sc);
+            SaveChanges();
         }
 
         public void delete(Category c)
         {
-
+            categories.Remove(c);
+            SaveChanges();
         }
 
         public void delete(Product p)
         {
-
+            products.Remove(p);
+            SaveChanges();
         }
 
         public void delete(Contact c)
         {
-
+            contacts.Remove(c);
+            SaveChanges();
         }
 
         public void delete(MoneyTransaction mt)
         {
-
+            moneyTransactions.Remove(mt);
+            SaveChanges();
         }
 
         public void delete(FinancialTransaction ft)
         {
-
+            FinancialTransactions.Remove(ft);
+            SaveChanges();
         }
 
         public void delete(ProductTransaction pt)
         {
-
+            SaveChanges();
         }
 
         #endregion

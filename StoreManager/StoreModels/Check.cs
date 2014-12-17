@@ -33,9 +33,6 @@ namespace StoreManager.StoreModels
             set { date = value; }
         }
 
-
-
-
         public PersianDateTime PersianDate
         {
             get { return new PersianDateTime(Date); }

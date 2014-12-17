@@ -18,10 +18,6 @@ namespace StoreManager.StoreModels
         private long sellPrice;
 
 
-
-
-
-
         [System.ComponentModel.DataAnnotations.Required]
         public long SellPrice
         {
