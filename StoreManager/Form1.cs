@@ -127,5 +127,17 @@ namespace StoreManager
         {
 
         }
+
+        private void bubbleButton1_Click(object sender, DevComponents.DotNetBar.ClickEventArgs e)
+        {
+            ProductFrm pf = new ProductFrm();
+            pf.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form1_old f = new Form1_old();
+            f.Show();
+        }
     }
 }
