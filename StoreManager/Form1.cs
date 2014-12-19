@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-
-
-using System.Data.Entity;
 
 namespace StoreManager
 {
@@ -21,367 +18,114 @@ namespace StoreManager
             InitializeComponent();
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            analogClockControl1.Value = DateTime.Now;
+        }
+
+
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void panelEx1_Paint(object sender, PaintEventArgs e)
         {
-            StoreModels.Check ch = new StoreModels.Check()
+            string todayshamsi;
+            PersianCalendar dater = new PersianCalendar();
+            string year = dater.GetYear(System.DateTime.Now).ToString();
+            int monnum = dater.GetMonth(System.DateTime.Now);
+            int day = dater.GetDayOfMonth(System.DateTime.Now);
+            int dayOfWeek = (int)System.DateTime.Now.DayOfWeek;
+            string week = "";
+
+            switch (dayOfWeek)
             {
-                Date = DateTime.Now,
-                Price = 2000,
-                VosoolStatus = StoreModels.Check.VosoolStatuses.pishAzMoed,
-                BankBranch = "1234"
+                case 1:
+                    week = "دوشنبه";
+                    break;
+                case 2:
+                    week = "سه شنبه";
+                    break;
+                case 3:
+                    week = "چهارشنبه";
+                    break;
+                case 4:
+                    week = "پنجشنبه";
+                    break;
+                case 5:
+                    week = "جمعه";
+                    break;
+                case 6:
+                    week = "شنبه";
+                    break;
+                case 7:
+                case 0:
+                    week = "یکشنبه";
+                    break;
+                default:
+                    week = "";
+                    break;
+            }
 
-            };
-
-            DBContext myDb = new DBContext();
-            myDb.save(ch);
+            string month = "";
+            switch (monnum)
+            {
+                case 1:
+                    month = "فروردین";
+                    break;
+                case 2:
+                    month = "اردیبهشت";
+                    break;
+                case 3:
+                    month = "خرداد";
+                    break;
+                case 4:
+                    month = "تیر";
+                    break;
+                case 5:
+                    month = "مرداد";
+                    break;
+                case 6:
+                    month = "شهریور";
+                    break;
+                case 7:
+                    month = "مهر";
+                    break;
+                case 8:
+                    month = "آبان";
+                    break;
+                case 9:
+                    month = "آذر";
+                    break;
+                case 10:
+                    month = "دی";
+                    break;
+                case 11:
+                    month = "بهمن";
+                    break;
+                case 12:
+                    month = "اسفند";
+                    break;
+            }//end switch
+            todayshamsi = "امروز\n" + week + "   " + day + " " + month + " " + year;
+            label1.Text = todayshamsi;
+            //label1.Text = ((int)System.DateTime.Now.DayOfWeek).ToString();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void bubbleBar1_ButtonClick(object sender, DevComponents.DotNetBar.ClickEventArgs e)
         {
 
-            StoreModels.SuperCategory sc = new StoreModels.SuperCategory()
-            {
-                Name = "سوپر دسته1"
-            };
-            DBContext myDb = new DBContext();
-            myDb.save(sc);
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void buttonItem1_Click(object sender, EventArgs e)
         {
-            DBContext myDb = new DBContext();
-            myDb.superCategories.Where(o => o.Name == "سوپر دسته1").Load();
-            var scats = myDb.superCategories.ToList();
 
-            StoreModels.SuperCategory sc;
-            if (scats.Count == 0)
-                sc = new StoreModels.SuperCategory()
-                {
-                    Name = "سوپر دسته جدید"
-                };
-            else
-                sc = scats[0];
-
-            StoreModels.Category c = new StoreModels.Category()
-            {
-                Name = "دسته1",
-                SuperCategory = sc
-            };
-
-            myDb.save(c);
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void contextMenuBar1_ItemClick(object sender, EventArgs e)
         {
-            DBContext myDb = new DBContext();
-            myDb.categories.Where(o => o.Name == "دسته1").Load();
-            var cats = myDb.categories.ToList();
 
-            StoreModels.Category c;
-            if (cats.Count == 0)
-            {
-                c = new StoreModels.Category()
-                {
-                    Name = "دسته جدید"
-                };
-            }
-                
-            else
-                c = cats[0];
-            StoreModels.Product p = new StoreModels.Product()
-            {
-                Availability = 10,
-                BuyPrice = 1000,
-                SellPrice = 1500,
-                Category = c,
-                Name = "محصول1",
-            };
-
-          
-            myDb.save(p);
         }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            StoreModels.Contact con = new StoreModels.Contact()
-            {
-                Name="Arash",
-                Type=StoreModels.Contact.Types.Person,
-                Phone="09355000000"
-            };
-            DBContext myDB = new DBContext();
-            myDB.save(con);
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                StoreModels.MoneyTransaction mt = new StoreModels.MoneyTransaction()
-                {
-                    CreationDate = DateTime.Now,
-                    IsPersonal = true,
-                    TotalPrice = 10000,
-                    Type = StoreModels.MoneyTransaction.MTTypes.Hazine
-                    
-                };
-                DBContext myDB = new DBContext();
-                myDB.save(mt);
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-            
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                StoreModels.FinancialTransaction ft = new StoreModels.FinancialTransaction()
-                {
-                    CreationDate = DateTime.Now,
-                    IsPersonal = true,
-                    TotalPrice = 10000,
-                    Type = StoreModels.FinancialTransaction.FTTypes.Talab,
-                    PayType = StoreModels.Transaction.PaymentTypes.Naghd
-
-                };
-                DBContext myDB = new DBContext();
-                myDB.save(ft);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                //throw;
-            }
-            
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            DBContext myDB = new DBContext();
-            myDB.products.Load();
-            StoreModels.Contact c = new StoreModels.Contact(); c = null;
-            bool isPaid=true;
-            StoreModels.Check ch = new StoreModels.Check(); ch = null;
-            var lst = myDB.products.ToList();
-            if (lst.Count == 0)
-            {
-                MessageBox.Show("محصولی ثبت نشده");
-                return;
-            }
-
-            List<StoreModels.ProductTransactionItem> listpti = new List<StoreModels.ProductTransactionItem>();
-            for (int i = 0; i < lst.Count; i++)
-            {
-                StoreModels.ProductTransactionItem temp = new StoreModels.ProductTransactionItem()
-                {
-                    Product = lst[i],
-                    Count = 3,
-                    ItemPrice = lst[0].SellPrice,
-                    ItemDiscount = 0,
-                };
-                listpti.Add(temp);
-            }
-
-            Store myStore = new Store();
-            myStore.sell(listpti, DateTime.Now,null,isPaid,c,ch);                
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            DBContext myDb = null;
-            try
-            {
-                myDb = new DBContext();
-                var temp = myDb.checks.Where(i => i.Code == 3).First();
-                temp.Price = 1000;
-                myDb.SaveChanges();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-            DBContext myDb = null;
-            try
-            {
-                myDb = new DBContext();
-                StoreModels.Check ck = myDb.checks.Where(i => i.Code == 4).First();
-                myDb.checks.Attach(ck);
-                myDb.delete(ck);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-            DBContext myDb = null;
-            try
-            {
-                myDb = new DBContext();
-                StoreModels.SuperCategory sc = myDb.superCategories.Where(i => i.Code == 1).FirstOrDefault();
-                myDb.superCategories.Attach(sc);
-                myDb.delete(sc);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void button18_Click(object sender, EventArgs e)
-        {
-            DBContext myDb = null;
-            try
-            {
-                myDb = new DBContext();
-                StoreModels.Category c = myDb.categories.Where(i => i.Code == 2).FirstOrDefault();
-                myDb.categories.Attach(c);
-                myDb.delete(c);
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void button19_Click(object sender, EventArgs e)
-        {
-            DBContext myDb = null;
-            try
-            {
-                myDb = new DBContext();
-                StoreModels.Product p = myDb.products.Where(i => i.Code == 5).FirstOrDefault();
-                myDb.products.Attach(p);
-                myDb.delete(p);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-        private void button20_Click(object sender, EventArgs e)
-        {
-            DBContext myDb = null;
-            try
-            {
-                myDb = new DBContext();
-                StoreModels.Contact c = myDb.contacts.Where(i => i.Code==1).FirstOrDefault();
-                myDb.contacts.Attach(c);
-                myDb.delete(c);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-        private void button21_Click(object sender, EventArgs e)
-        {
-            DBContext myDb = null;
-            try
-            {
-                myDb = new DBContext();
-                StoreModels.MoneyTransaction mt = myDb.moneyTransactions.Where(i => i.Code == 1).FirstOrDefault();
-                myDb.moneyTransactions.Attach(mt);
-                myDb.delete(mt);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-            DBContext myDb = null;
-            try
-            {
-                myDb = new DBContext();
-                StoreModels.FinancialTransaction ft = myDb.FinancialTransactions.Where(i => i.Code == 2).FirstOrDefault();
-                myDb.FinancialTransactions.Attach(ft);
-                myDb.delete(ft);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-            DBContext myDb = null;
-            try
-            {
-                myDb = new DBContext();
-                myDb.products.Load();
-                var lst = myDb.products.ToList();
-                if (lst.Count == 0)
-                {
-                    //لیست خالی
-                }
-                else
-                {
-                    bool flag = false;
-                    myDb.superCategories.Load();
-                    var lst1 = myDb.superCategories.ToList();
-                    for (int i = 0; i < lst1.Count; i++)
-                    {
-                        if (lst1[i].Name =="")
-                        {
-                            flag = true;
-                        }
-                        if (!flag)
-                        {
-                            StoreModels.SuperCategory sc = new StoreModels.SuperCategory()
-                            {
-                                Name = "سوپر دسته"
-                            };
-                            myDb.save(sc);
-                        }
-                    }
-                    myDb.categories.Load();
-                    var lst2 = myDb.categories.ToList();
-                    for (int i = 0; i < lst1.Count; i++)
-                    {
-                        if (lst2[i].Name == "دسته1")
-                        {
-                            flag = true;
-                        }
-                        if (!flag)
-                        {
-                            StoreModels.Category c = new StoreModels.Category()
-                            {
-                                Name = "کالا"
-                            };
-                            myDb.save(c);
-                        }
-                    }
-                }
-                
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-
     }
 }
