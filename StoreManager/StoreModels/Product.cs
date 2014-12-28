@@ -41,7 +41,6 @@ namespace StoreManager.StoreModels
             set { code = value; }
         }
 
-        [System.ComponentModel.DataAnnotations.Required]
         public Category Category
         {
             get { return category; }
