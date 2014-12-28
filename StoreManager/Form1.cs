@@ -139,5 +139,10 @@ namespace StoreManager
             Form1_old f = new Form1_old();
             f.Show();
         }
+
+        private void buttonX2_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
