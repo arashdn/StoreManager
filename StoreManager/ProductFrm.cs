@@ -25,6 +25,7 @@ namespace StoreManager
         {
             try
             {
+                dataGridViewX1.Columns.Clear();
                 myDb = new DBContext();
                 //myDb.products.Load();
                 var lst = myDb.products.Include("Category").ToList();
