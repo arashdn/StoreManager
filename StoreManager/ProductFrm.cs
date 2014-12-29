@@ -20,7 +20,7 @@ namespace StoreManager
             
         }
         DBContext myDb;
-
+        List<StoreModels.Product> lst;
         void refresh()
         {
             try
@@ -28,7 +28,7 @@ namespace StoreManager
                 dataGridViewX1.Columns.Clear();
                 myDb = new DBContext();
                 //myDb.products.Load();
-                var lst = myDb.products.Include("Category").ToList();
+                lst = myDb.products.Include("Category").ToList();
                 dataGridViewX1.DataSource = lst;
                 dataGridViewX1.Columns["category"].Visible = false;
 
@@ -220,6 +220,15 @@ namespace StoreManager
         private void ذخیرهتغییراتToolStripMenuItem_Click(object sender, EventArgs e)
         {
             saveEdits();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "" && lst != null)
+                dataGridViewX1.DataSource = lst.ToList();
+            else
+                dataGridViewX1.DataSource = lst.Where(i => i.Name.Contains(textBox1.Text)).ToList();
+            dataGridViewX1.Columns["Delete"].DisplayIndex = 7;
         }
     }
 }
