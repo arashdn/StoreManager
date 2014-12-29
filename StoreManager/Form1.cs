@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.Data.Entity;
+
 namespace StoreManager
 {
     public partial class Form1 : Form
@@ -23,10 +25,61 @@ namespace StoreManager
             analogClockControl1.Value = DateTime.Now;
         }
 
+        void refresh()
+        {
+            try
+            {
+                listView2.Items.Clear();
+                DBContext myDB = new DBContext();
+                myDB.products.Where(i => i.Availability < 10).Load();
+                var lst = myDB.products.Where(i => i.Availability < 10).OrderBy(i => i.Availability).ToList();
+                foreach (StoreModels.Product item in lst)
+                {
+                    ListViewItem lvi = new ListViewItem(new[] { item.Name, item.Availability.ToString() });
+                    //listView2.Items.Add(lvi);
+                    listView2.Invoke((MethodInvoker)delegate
+                    {
+                        listView2.Items.Add(lvi);
+                    });
+                }
+
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                String s = "خطا در خواندن اطلاعات از پایگاه داده\nمشخصات فنی:\n";
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        System.Diagnostics.Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+                        s = s + "\nProperty: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage;
+                    }
+                }
+                MessageBox.Show(s);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("خطایی رخ داد\n" + ex.Message);
+            }
+            finally
+            {
+                listView2.Invoke((MethodInvoker)delegate
+                {
+                    listView2.Visible = true;
+                });
+                circularProgress1.Invoke((MethodInvoker)delegate
+                {
+                    circularProgress1.Visible = false;
+                });
+            }
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            circularProgress1.IsRunning = true;
+            listView2.Visible = false;
+            backgroundWorker1.RunWorkerAsync();
+            
         }
 
         private void panelEx1_Paint(object sender, PaintEventArgs e)
@@ -132,6 +185,7 @@ namespace StoreManager
         {
             ProductFrm pf = new ProductFrm();
             pf.ShowDialog();
+            refresh();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -143,6 +197,11 @@ namespace StoreManager
         private void buttonX2_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            refresh();
         }
     }
 }
