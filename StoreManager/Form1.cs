@@ -203,5 +203,43 @@ namespace StoreManager
         {
             refresh();
         }
+
+
+        void notCompeleteYet()
+        {
+            DevComponents.DotNetBar.ToastNotification.Show(this, "\nاین قسمت پیاده سازی نشده\n", null, 5000,
+                DevComponents.DotNetBar.eToastGlowColor.Red, (bubbleBar1.Size.Width) / 2, bubbleBar1.Location.Y - bubbleBar1.Size.Height + 15);
+        }
+        private void bubbleButton2_Click(object sender, DevComponents.DotNetBar.ClickEventArgs e)
+        {
+
+            notCompeleteYet();
+            
+        }
+
+        private void bubbleButton3_Click(object sender, DevComponents.DotNetBar.ClickEventArgs e)
+        {
+            notCompeleteYet();
+        }
+
+        private void bubbleButton4_Click(object sender, DevComponents.DotNetBar.ClickEventArgs e)
+        {
+            notCompeleteYet();
+        }
+
+        private void buttonX1_Click(object sender, EventArgs e)
+        {
+            notCompeleteYet();
+        }
+
+        private void خروجToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void دربارهماToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Programmed by Arash Dargahi , Saeed Piri\nDevelopment version 0.1", "Still Not Compelete", MessageBoxButtons.OK, MessageBoxIcon.Information,MessageBoxDefaultButton.Button1);
+        }
     }
 }
